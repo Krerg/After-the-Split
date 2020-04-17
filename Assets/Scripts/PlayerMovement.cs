@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using MyBox;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -31,7 +33,6 @@ public class PlayerMovement : MonoBehaviour
         //Прыжок по пробелу
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            //rb.velocity += Vector2.up * jumpForce * Time.fixedDeltaTime;
             rb.AddForce(Vector2.up * jumpForce * Time.fixedDeltaTime, ForceMode2D.Impulse);
         }
 
@@ -68,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
                         velocity = temp;
                         movingObject = null;
                     }
-                }
+                } 
                 movingRb.AddForce(movement * velocity * Time.fixedDeltaTime);
             }
         }
@@ -81,6 +82,16 @@ public class PlayerMovement : MonoBehaviour
         else if (rb.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
         {
             rb.AddForce(Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.fixedDeltaTime);
+        }
+
+        //Если игрок стоит на обьекте, то он его не перемещает, чтобы игрок не мог превращать кубики в жигули
+        if (this.GetComponent<BoxCollider2D>().bounds.min.y > movingObject.gameObject.GetComponent<BoxCollider2D>().bounds.max.y)
+        {
+            print("Goddammit");
+            movingRb.mass = tempMass;
+            movingRb.drag = tempDrag;
+            velocity = temp;
+            movingObject = null;
         }
     }
 
@@ -98,26 +109,24 @@ public class PlayerMovement : MonoBehaviour
     private float tempDrag;
 
     //Замедление игрока при движении обьекта
-    public float slownessWhenMovingObject;
-
-    void OnCollisionStay2D(Collision2D collision)
-    {
-
-        float xAxis = Input.GetAxis("Horizontal");
-    }
+    [Min(1)]
+    public float movingObjectSlowdown;
+    
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.TryGetComponent<MovableObject>(out movingObject))
         {
+            //Запоминаем физические характеристики объекта для дальнейшего возвращения
             temp = velocity;
             movingRb = collision.gameObject.GetComponent<Rigidbody2D>();
             tempMass = movingRb.mass;
             tempDrag = movingRb.drag;
 
+            //Меняем несколько переменных для корректной работы с физикой
             movingRb.mass = 0.03f;
             movingRb.drag = 3;
 
-            velocity /= movingRb.mass * movingRb.drag + slownessWhenMovingObject;
+            velocity /= tempMass * (tempDrag + 1) * movingObjectSlowdown;
             if (velocity / movingRb.mass < velocity)
             {
                 velocity /= movingRb.mass;
@@ -127,6 +136,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
+        //Возвращаем характеристики объекта
         movingRb.mass = tempMass;
         movingRb.drag = tempDrag;
         velocity = temp;

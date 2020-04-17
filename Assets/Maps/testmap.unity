@@ -1846,11 +1846,11 @@ MonoBehaviour:
   velocity: 35
   maxSpeed: 50
   jumpForce: 15.5
-  fallMultiplier: 2.5
+  fallMultiplier: 5
   lowJumpMultiplier: 2
-  slowness: 4.97
   movingObject: {fileID: 0}
   movingRb: {fileID: 0}
+  movingObjectSlowdown: 2.25
 --- !u!1 &1215957141
 GameObject:
   m_ObjectHideFlags: 0
@@ -2106,11 +2106,11 @@ MonoBehaviour:
   velocity: 35
   maxSpeed: 50
   jumpForce: 15.5
-  fallMultiplier: 2.5
+  fallMultiplier: 5
   lowJumpMultiplier: 2
-  slowness: 0
   movingObject: {fileID: 0}
   movingRb: {fileID: 0}
+  movingObjectSlowdown: 2.25
 --- !u!1 &1344148570
 GameObject:
   m_ObjectHideFlags: 0
