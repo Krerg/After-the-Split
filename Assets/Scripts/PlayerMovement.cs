@@ -102,8 +102,8 @@ public class PlayerMovement : MonoBehaviour
     /// Чтобы пометить объект как передвигаемый, 
     /// Нужно добавить на него скрипт "MovableObject"
     /// </summary>
-    public MovableObject movingObject;
-    public Rigidbody2D movingRb;
+    private MovableObject movingObject;
+    private Rigidbody2D movingRb;
     private float temp;
     private float tempMass;
     private float tempDrag;
