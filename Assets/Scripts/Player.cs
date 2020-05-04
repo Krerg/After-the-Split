@@ -30,9 +30,9 @@ public class Player : MonoBehaviour
     public LayerMask platformLayer;
 
     //Замедление при движении обьекта (static чтобы можно было получать доступ из других скриптов)
-    [Min(1)]
-    public float MovingObjectsSlowdown;
-    public static float movingObjectsSlowdown;
+    [Range(0, 1)]
+    public float MovingObjectsAcceleration;
+    public static float movingObjectsAcceleration;
 
     // Start is called before the first frame update
     void Start()
@@ -64,8 +64,9 @@ public class Player : MonoBehaviour
                 isRunningJump = false;
             }
             print("jump");
-
         }
+
+        //Бег (Shift)
         if (Input.GetKey(KeyCode.LeftShift))
         {
             
@@ -94,7 +95,7 @@ public class Player : MonoBehaviour
 
         
 
-        bool inAir = !isGrounded();
+        bool inAir = !IsGrounded();
         print(inAir);
 
         if(!inAir)
@@ -121,12 +122,13 @@ public class Player : MonoBehaviour
             rb.AddForce(movement * (acceleration + (isRunning * runningAcceleration)));
         }
 
-        movingObjectsSlowdown = MovingObjectsSlowdown;
+        movingObjectsAcceleration = MovingObjectsAcceleration;
     }
 
-    BoxCollider2D coll;
     float tempVelocity;
     MovableObject movable;
+    public BoxCollider2D ground;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Ghost")
@@ -137,8 +139,7 @@ public class Player : MonoBehaviour
         //Изменяем скорость при столкновении с обьектом
         if (collision.gameObject.TryGetComponent<MovableObject>(out movable))
         {
-            coll = GetComponent<BoxCollider2D>();
-            if (coll.bounds.min.y < collision.gameObject.GetComponent<BoxCollider2D>().bounds.center.y)
+            if (!ground.IsTouching(collision.gameObject.GetComponent<BoxCollider2D>()))
             {
                 tempVelocity = acceleration;
                 movable.ChangeVelocity(ref acceleration);
@@ -146,7 +147,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private bool isGrounded()
+    private bool IsGrounded()
     {
         float rayHeight = .2f;
         RaycastHit2D raycastHit = Physics2D.Raycast(playerCollider.bounds.center, Vector2.down, playerCollider.bounds.extents.y + rayHeight, platformLayer);
@@ -168,7 +169,10 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent<MovableObject>(out movable))
         {
-            acceleration = tempVelocity;
+            if(tempVelocity != 0)
+            {
+                acceleration = tempVelocity;
+            }
         }
     }
 }
