@@ -8,6 +8,8 @@ public class Camera : MonoBehaviour
 
     public Transform target;
 
+    private bool isEndGame = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +19,15 @@ public class Camera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 target_position = new Vector3(target.position.x, target.position.y+1.7f, target.position.z);
+        Vector3 target_position;
+        if (isEndGame)
+        {
+            target_position = new Vector3(36f, -12.44f, target.position.z);
+        } else
+        {
+            target_position = new Vector3(target.position.x, target.position.y + 1.7f, target.position.z);
+        }
+         
         target_position.z = transform.position.z - 1;
 
         Vector3 approximate_target_position = Vector3.Lerp(transform.position, target_position, speed * Time.deltaTime);
@@ -27,9 +37,9 @@ public class Camera : MonoBehaviour
             transform.position = new Vector3(-4f, transform.position.y, transform.position.z);
         }
 
-        if (approximate_target_position.x > 21f)
+        if (approximate_target_position.x > 32f)
         {
-            transform.position = new Vector3(21f, transform.position.y, transform.position.z);
+            transform.position = new Vector3(32f, transform.position.y, transform.position.z);
         }
 
         if (approximate_target_position.y > -13f)
@@ -42,5 +52,10 @@ public class Camera : MonoBehaviour
             transform.position = new Vector3(transform.position.x, -27f, transform.position.z);
         }
         
+    }
+
+    public void EndGame()
+    {
+        isEndGame = true;
     }
 }

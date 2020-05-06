@@ -158,6 +158,12 @@ public class PlayerAnimator : MonoBehaviour
                 break;
 
             case Animation.jump_start:
+                if (track.Animation.Name == "idle")
+                {
+                    print("ahahahahaaaaa");
+                    SetAnimation(Animation.jump_start, false);
+                    break;
+                } 
                 SetAnimation(wasFalling ? Animation.jump_down_cycle : Animation.jump_up_cycle, true);
                 break;
 

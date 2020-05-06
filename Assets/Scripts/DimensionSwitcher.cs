@@ -5,7 +5,7 @@ using UnityEngine;
 public class DimensionSwitcher : MonoBehaviour
 {
 
-    int state = 1;
+    int state = 0;
 
     bool isSwitchPossible = false;
 
@@ -29,7 +29,9 @@ public class DimensionSwitcher : MonoBehaviour
             if (state == 1)
             {
                 map1.EnableCollision();
+                map1.EnableLight();
                 map2.DisableCollision();
+                map2.DisableLight();
                 StartCoroutine(map1.FadeImage(false));
                 StartCoroutine(map2.FadeImage(true));
                 state = 0;
@@ -37,7 +39,9 @@ public class DimensionSwitcher : MonoBehaviour
             else
             {
                 map2.EnableCollision();
+                map2.EnableLight();
                 map1.DisableCollision();
+                map1.DisableLight();
                 StartCoroutine(map1.FadeImage(true));
                 StartCoroutine(map2.FadeImage(false));
                 state = 1;
@@ -51,7 +55,7 @@ public class DimensionSwitcher : MonoBehaviour
         GameObject player = GameObject.Find("Player");
         BoxCollider2D bc = player.GetComponentInChildren<BoxCollider2D>();
         
-        if (state == 1)
+        if (state == 0)
         {
             StartCoroutine(player.transform.GetChild(0).GetComponent<Fadable>().FadeMeshImage(true));
             StartCoroutine(player.transform.GetChild(1).GetComponent<Fadable>().FadeMeshImage(false));
@@ -76,5 +80,10 @@ public class DimensionSwitcher : MonoBehaviour
     {
         isSwitchPossible = true;
         print("Можно переместиться");
+    }
+
+    public bool isTom()
+    {
+        return state == 0;
     }
 }

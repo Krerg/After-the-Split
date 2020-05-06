@@ -33,6 +33,8 @@ public class Player : MonoBehaviour
 
     public LayerMask platformLayer;
 
+    private TriggerManager triggerManager;
+
     //Замедление при движении обьекта (static чтобы можно было получать доступ из других скриптов)
     [Min(1)]
     public float MovingObjectsSlowdown;
@@ -45,6 +47,7 @@ public class Player : MonoBehaviour
         playerCollider = GetComponent<BoxCollider2D>();
         playerAnimators = GetComponentsInChildren<PlayerAnimator>();
         saraAnimators = GetComponentsInChildren<SaraAnimator>();
+        triggerManager = GameObject.Find("TriggerManager").GetComponent<TriggerManager>();
     }
 
     // Update is called once per frame
@@ -57,16 +60,21 @@ public class Player : MonoBehaviour
         //Прыжок по пробелу
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            if (!isGrounded())
+            {
+                return;
+            }
             if (isRunning == 1)
             {
                 rb.AddForce(movement * jumpRunningHorizontalAcceleration);
-                rb.AddForce(transform.up * jumpRunningVerticalAcceleration, ForceMode2D.Impulse);
+                rb.velocity += Vector2.up * jumpRunningVerticalAcceleration;
                 isRunningJump = true;
 
             }
             else
             {
-                rb.AddForce(transform.up * jumpWalkingVerticalAcceleration, ForceMode2D.Impulse);
+                
+                rb.velocity += Vector2.up * jumpWalkingVerticalAcceleration;
                 isRunningJump = false;
             }
 
@@ -89,6 +97,10 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
+            if(!triggerManager.getCanUseItem())
+            {
+                return;
+            }
             isUsingItem = true;
             foreach (var animator in playerAnimators)
                 animator.Action();
@@ -96,6 +108,7 @@ public class Player : MonoBehaviour
             foreach (var animator in saraAnimators)
                 animator.Action();
             Invoke("UnfreezePlayer", 2);
+            triggerManager.UseItem();
         }
     }
 
@@ -209,7 +222,7 @@ public class Player : MonoBehaviour
 
     private bool isGrounded()
     {
-        float rayHeight = .2f;
+        float rayHeight = .5f;
         RaycastHit2D raycastHit = Physics2D.Raycast(playerCollider.bounds.center, Vector2.down, playerCollider.bounds.extents.y + rayHeight, platformLayer);
         Color rayColor;
         if(raycastHit.collider != null)
@@ -234,4 +247,8 @@ public class Player : MonoBehaviour
                 animator.EndPush();
         }
     }
+
+
+
+    
 }

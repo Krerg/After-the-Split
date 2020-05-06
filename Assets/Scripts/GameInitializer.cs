@@ -29,15 +29,21 @@ public class GameInitializer : MonoBehaviour
         Fadable map1 = GameObject.Find("Map1").GetComponent<Fadable>();
         Fadable map2 = GameObject.Find("Map2").GetComponent<Fadable>();
 
+
         
-        StartCoroutine(map1.FadeImage(true));
-        map1.DisableCollision();
 
         Transform tmap1 = GameObject.Find("Map1").GetComponent<Transform>();
         Transform tmap2 = GameObject.Find("Map2").GetComponent<Transform>();
 
         tmap2.position = new Vector3(0, 0, 0);
         tmap1.position = new Vector3(0, 0, 0);
+
+        map1.EnableCollision();
+        map1.EnableLight();
+        map2.DisableCollision();
+        map2.DisableLight();
+        StartCoroutine(map1.FadeImage(false));
+        StartCoroutine(map2.FadeImage(true));
     }
 
     public void SwitchDimension()

@@ -9,22 +9,17 @@ public class NextDialog : MonoBehaviour
     public GameObject dialogManager;
     public bool I_need_tom;
     public bool tom;
+    private DimensionSwitcher ds;
     // Start is called before the first frame update
     void Start()
     {
         tom = true;
+        ds = GameObject.Find("DimensionSwitcher").GetComponent<DimensionSwitcher>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            if (tom == true)
-                tom = false;
-            else
-                tom = true;
-        }
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -33,7 +28,7 @@ public class NextDialog : MonoBehaviour
         {
             if (col.gameObject.tag == "Player")
             {
-                if (I_need_tom == tom)
+                if (I_need_tom == ds.isTom())
                 {
                     dialogManager.GetComponent<Dialog>().NextSentence(newIndex);
                     showed = true;

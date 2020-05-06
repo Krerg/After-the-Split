@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class Fadable : MonoBehaviour
 {
@@ -126,10 +127,31 @@ public class Fadable : MonoBehaviour
         Rigidbody2D[] childrenRigidBody = GetComponentsInChildren<Rigidbody2D>();
         foreach (Rigidbody2D child in childrenRigidBody)
         {
-            
+            if(child.name == "LockedBox")
+            {
+                continue;
+            }
             child.isKinematic = false;
         }
 
+    }
+
+    public void DisableLight()
+    {
+        Light2D[] children = GetComponentsInChildren<Light2D>();
+        foreach (Light2D child in children)
+        {
+            child.enabled = false;
+        }
+    }
+
+    public void EnableLight()
+    {
+        Light2D[] children = GetComponentsInChildren<Light2D>();
+        foreach (Light2D child in children)
+        {
+            child.enabled = true;
+        }
     }
 
 }
