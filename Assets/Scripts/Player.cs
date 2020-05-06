@@ -25,6 +25,8 @@ public class Player : MonoBehaviour
 
     private int isRunning = 0;
 
+    private bool isUsingItem = false;
+
     private bool isRunningJump = false;
 
     private BoxCollider2D playerCollider;
@@ -85,12 +87,24 @@ public class Player : MonoBehaviour
             isRunning = 0;
         }
 
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            isUsingItem = true;
+            foreach (var animator in playerAnimators)
+                animator.Action();
 
+            foreach (var animator in saraAnimators)
+                animator.Action();
+            Invoke("UnfreezePlayer", 2);
+        }
     }
 
     private void FixedUpdate()
     {
-        
+        if(isUsingItem)
+        {
+            return;
+        }
 
         //Получаем пользовательский ввод 
         float moveHorizontal = Input.GetAxis("Horizontal");
@@ -134,8 +148,9 @@ public class Player : MonoBehaviour
         bool isMoving = !Mathf.Approximately(movement.x, 0.0f);
         bool isFalling = rb.velocity.y < 0.0f;
         foreach (var animator in playerAnimators) {
-            animator.UpdateAnimation(isMoving, inAir, isFalling);
-            if (isMoving) {
+            if (!isUsingItem)
+                animator.UpdateAnimation(isMoving, inAir, isFalling);
+            if (isMoving && !isUsingItem) {
                 var s = animator.transform.localScale;
                 s.x = (movement.x < 0 ? -Mathf.Abs(s.x) : Mathf.Abs(s.x));
                 animator.transform.localScale = s;
@@ -145,8 +160,9 @@ public class Player : MonoBehaviour
 
         foreach (var animator in saraAnimators)
         {
-            animator.UpdateAnimation(isMoving, inAir, isFalling);
-            if (isMoving)
+            if (!isUsingItem)
+                animator.UpdateAnimation(isMoving, inAir, isFalling);
+            if (isMoving && !isUsingItem)
             {
                 var s = animator.transform.localScale;
                 s.x = (movement.x < 0 ? -Mathf.Abs(s.x) : Mathf.Abs(s.x));
@@ -154,6 +170,17 @@ public class Player : MonoBehaviour
             }
         }
 
+    }
+
+    private void UnfreezePlayer()
+    {
+        foreach(var animator in playerAnimators)
+            animator.UpdateAnimation(false, false, false);
+
+        foreach (var animator in saraAnimators)
+            animator.UpdateAnimation(false, false, false);
+
+        isUsingItem = false;
     }
 
     BoxCollider2D coll;

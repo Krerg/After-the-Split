@@ -10,6 +10,7 @@ public class SaraAnimator : MonoBehaviour
 
     public enum SaraAnimation
     {
+        
         idle_sara,
         run_start_sara,
         run_cycle_sara,
@@ -23,6 +24,7 @@ public class SaraAnimator : MonoBehaviour
         push_end_sara,
         pull_start_sara,
         pull_cycle_sara,
+        action,
         pull_end_sara,
     }
 
@@ -45,6 +47,11 @@ public class SaraAnimator : MonoBehaviour
     public void Jump()
     {
         SetAnimation(SaraAnimation.jump_start_sara, false);
+    }
+
+    public void Action()
+    {
+        SetAnimation(SaraAnimation.action, false);
     }
 
     public void BeginPush()
@@ -77,6 +84,9 @@ public class SaraAnimator : MonoBehaviour
 
         switch (currentAnimation)
         {
+            case SaraAnimation.action:
+                SetAnimation(SaraAnimation.idle_sara, true);
+                break;
             case SaraAnimation.idle_sara:
                 if (inAir && isFalling)
                     SetAnimation(SaraAnimation.jump_down_cycle_sara, true);
@@ -131,8 +141,12 @@ public class SaraAnimator : MonoBehaviour
 
     void OnAnimationEnded(TrackEntry track)
     {
+        
         switch (currentAnimation)
         {
+            case SaraAnimation.action:
+
+                break;
             case SaraAnimation.run_start_sara:
                 SetAnimation(SaraAnimation.run_cycle_sara, true);
                 break;

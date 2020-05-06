@@ -7,7 +7,7 @@ public class DimensionSwitcher : MonoBehaviour
 
     int state = 1;
 
-    bool isSwitchPossible = true;
+    bool isSwitchPossible = false;
 
     // Start is called before the first frame update
     void Start()
@@ -53,14 +53,14 @@ public class DimensionSwitcher : MonoBehaviour
         
         if (state == 1)
         {
-            StartCoroutine(player.transform.GetChild(1).GetComponent<Fadable>().FadeMeshImage(true));
-            StartCoroutine(player.transform.GetChild(2).GetComponent<Fadable>().FadeMeshImage(false));
+            StartCoroutine(player.transform.GetChild(0).GetComponent<Fadable>().FadeMeshImage(true));
+            StartCoroutine(player.transform.GetChild(1).GetComponent<Fadable>().FadeMeshImage(false));
             bc.size = new Vector2(0.5159993f, 1.023184f);
             bc.offset = new Vector2(-0.01571423f, 0.01005542f);
         } else
         {
-            StartCoroutine(player.transform.GetChild(1).GetComponent<Fadable>().FadeMeshImage(false));
-            StartCoroutine(player.transform.GetChild(2).GetComponent<Fadable>().FadeMeshImage(true));
+            StartCoroutine(player.transform.GetChild(0).GetComponent<Fadable>().FadeMeshImage(false));
+            StartCoroutine(player.transform.GetChild(1).GetComponent<Fadable>().FadeMeshImage(true));
             bc.size = new Vector2(0.5159993f, 0.7283263f);
             bc.offset = new Vector2(-0.01571423f, -0.1358368f);
         }

@@ -27,7 +27,7 @@ public class GhostObject : MonoBehaviour
         
         if (collision.gameObject.tag == "Player")
         {
-            ds.DisableSwitch();
+            ds.EnableSwitch();
         }
     }
 
@@ -35,7 +35,7 @@ public class GhostObject : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            ds.EnableSwitch();
+            ds.DisableSwitch();
         }
     }
 

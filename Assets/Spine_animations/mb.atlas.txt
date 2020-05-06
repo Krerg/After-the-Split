@@ -1,0 +1,41 @@
+
+mb.png
+size: 1630,1542
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+ballerina
+  rotate: false
+  xy: 1139, 906
+  size: 489, 634
+  orig: 489, 634
+  offset: 0, 0
+  index: -1
+ballerina2
+  rotate: false
+  xy: 1139, 270
+  size: 385, 634
+  orig: 385, 634
+  offset: 0, 0
+  index: -1
+base
+  rotate: false
+  xy: 2, 351
+  size: 1135, 408
+  orig: 1137, 410
+  offset: 1, 1
+  index: -1
+cap
+  rotate: false
+  xy: 2, 2
+  size: 1096, 347
+  orig: 1098, 349
+  offset: 1, 1
+  index: -1
+Слой 1
+  rotate: false
+  xy: 2, 761
+  size: 1135, 779
+  orig: 1137, 781
+  offset: 1, 1
+  index: -1

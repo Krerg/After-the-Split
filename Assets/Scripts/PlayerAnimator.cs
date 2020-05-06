@@ -9,6 +9,7 @@ public class PlayerAnimator : MonoBehaviour
 {
     public enum Animation
     {
+        action,
         idle,
         run_start,
         run_cycle,
@@ -48,6 +49,12 @@ public class PlayerAnimator : MonoBehaviour
         SetAnimation(Animation.jump_start, false);
     }
 
+    public void Action()
+    {
+        print("Use");
+        SetAnimation(Animation.action, false);
+    }
+
     public void BeginPush()
     {
         SetAnimation(Animation.push_start, false);
@@ -77,6 +84,11 @@ public class PlayerAnimator : MonoBehaviour
         wasMoving = isMoving;
 
         switch (currentAnimation) {
+            case Animation.action:
+                SetAnimation(Animation.idle, true);
+                break;
+                
+
             case Animation.idle:
                 if (inAir && isFalling)
                     SetAnimation(Animation.jump_down_cycle, true);
@@ -126,12 +138,17 @@ public class PlayerAnimator : MonoBehaviour
                 if (inAir)
                     SetAnimation(Animation.jump_start, false);
                 break;
+            
         }
     }
 
     void OnAnimationEnded(TrackEntry track)
     {
         switch (currentAnimation) {
+            case Animation.action:
+                
+                print("Use ended");
+                break;
             case Animation.run_start:
                 SetAnimation(Animation.run_cycle, true);
                 break;
