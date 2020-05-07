@@ -62,13 +62,17 @@ public class DimensionSwitcher : MonoBehaviour
         if (state == 0)
         {
             StartCoroutine(player.transform.GetChild(0).GetComponent<Fadable>().FadeMeshImage(true));
+            player.transform.GetChild(0).GetComponent<AudioSource>().enabled = false;
             StartCoroutine(player.transform.GetChild(1).GetComponent<Fadable>().FadeMeshImage(false));
+            player.transform.GetChild(1).GetComponent<AudioSource>().enabled = true;
             bc.size = new Vector2(0.5159993f, 1.023184f);
             bc.offset = new Vector2(-0.01571423f, 0.01005542f);
         } else
         {
             StartCoroutine(player.transform.GetChild(0).GetComponent<Fadable>().FadeMeshImage(false));
+            player.transform.GetChild(0).GetComponent<AudioSource>().enabled = true;
             StartCoroutine(player.transform.GetChild(1).GetComponent<Fadable>().FadeMeshImage(true));
+            player.transform.GetChild(1).GetComponent<AudioSource>().enabled = false;
             bc.size = new Vector2(0.5159993f, 0.7283263f);
             bc.offset = new Vector2(-0.01571423f, -0.1358368f);
         }

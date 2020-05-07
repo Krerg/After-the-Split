@@ -7,6 +7,9 @@ using UnityEngine;
 
 public class PlayerAnimator : MonoBehaviour
 {
+
+    AudioSource audioData;
+
     public enum Animation
     {
         action,
@@ -42,6 +45,7 @@ public class PlayerAnimator : MonoBehaviour
         spineAnimation = GetComponent<SkeletonAnimation>();
         spineAnimation.AnimationName = currentAnimation.ToString();
         spineAnimation.AnimationState.End += OnAnimationEnded;
+        audioData = GetComponent<AudioSource>();
     }
 
     public void Jump()
@@ -150,37 +154,44 @@ public class PlayerAnimator : MonoBehaviour
                 print("Use ended");
                 break;
             case Animation.run_start:
+                audioData.loop = true;
+                audioData.Play(0);
                 SetAnimation(Animation.run_cycle, true);
                 break;
 
             case Animation.run_end:
+                audioData.Stop();
                 SetAnimation(Animation.idle, true);
                 break;
 
             case Animation.jump_start:
-                if (track.Animation.Name == "idle")
+                audioData.Stop();
+                /*if (track.Animation.Name == "idle")
                 {
-                    print("ahahahahaaaaa");
                     SetAnimation(Animation.jump_start, false);
                     break;
-                } 
+                } */
                 SetAnimation(wasFalling ? Animation.jump_down_cycle : Animation.jump_up_cycle, true);
                 break;
 
             case Animation.jump_end:
+                audioData.Stop();
                 SetAnimation(wasMoving ? Animation.run_cycle : Animation.idle, true);
                 break;
 
             case Animation.push_start:
+                audioData.Stop();
                 SetAnimation(Animation.push_cycle, true);
                 break;
 
             case Animation.pull_start:
+                audioData.Stop();
                 SetAnimation(Animation.pull_cycle, true);
                 break;
 
             case Animation.push_end:
             case Animation.pull_end:
+                audioData.Stop();
                 if (wasInAir)
                     SetAnimation(wasFalling ? Animation.jump_down_cycle : Animation.jump_up_cycle, true);
                 else if (wasMoving)

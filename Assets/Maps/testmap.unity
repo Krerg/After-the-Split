@@ -7976,7 +7976,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330249428}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.36, y: -25.38, z: -58.17243}
+  m_LocalPosition: {x: 36.59, y: -23.04, z: -58.17243}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -11156,7 +11156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e67ba7f6f8532b4cbd9ca7f0cc3e2ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelHint: {fileID: 0}
+  levelHint: {fileID: 825890306}
   lockedBox: {fileID: 2067849540}
   isFirstOpen: 0
   isSecondOpen: 0
@@ -19865,7 +19865,7 @@ GameObject:
   - component: {fileID: 825890307}
   - component: {fileID: 825890306}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: LevelHint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19888,7 +19888,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 1159, y: -277}
+  m_AnchoredPosition: {x: 1159, y: -235}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &825890306
@@ -21622,8 +21622,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textDisplay: {fileID: 1399633130}
-  hint: {fileID: 0}
-  levelHint: {fileID: 0}
+  hint: {fileID: 825890306}
+  levelHint: {fileID: 843932810}
   sentences:
   - "\u0422\u043E\u043C: \u041E\u043F\u044F\u0442\u044C \u044D\u0442\u043E\u0442
     \u0437\u043D\u0430\u043A, \u043A\u0430\u043A \u0432 \u043A\u043E\u043C\u043D\u0430\u0442\u0435

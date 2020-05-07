@@ -8,6 +8,8 @@ using UnityEngine;
 public class SaraAnimator : MonoBehaviour
 {
 
+    AudioSource audioData;
+
     public enum SaraAnimation
     {
         
@@ -42,6 +44,8 @@ public class SaraAnimator : MonoBehaviour
         spineAnimation = GetComponent<SkeletonAnimation>();
         spineAnimation.AnimationName = currentAnimation.ToString();
         spineAnimation.AnimationState.End += OnAnimationEnded;
+        audioData = GetComponent<AudioSource>();
+        
     }
 
     public void Jump()
@@ -149,26 +153,33 @@ public class SaraAnimator : MonoBehaviour
                 break;
             case SaraAnimation.run_start_sara:
                 SetAnimation(SaraAnimation.run_cycle_sara, true);
+                audioData.loop = true;
+                audioData.Play(0);
                 break;
 
             case SaraAnimation.run_end_sara:
                 SetAnimation(SaraAnimation.idle_sara, true);
+                audioData.Stop();
                 break;
 
             case SaraAnimation.jump_start_sara:
                 SetAnimation(wasFalling ? SaraAnimation.jump_down_cycle_sara : SaraAnimation.jump_up_cycle_sara, true);
+                audioData.Stop();
                 break;
 
             case SaraAnimation.jump_end_sara:
                 SetAnimation(wasMoving ? SaraAnimation.run_cycle_sara : SaraAnimation.idle_sara, true);
+                audioData.Stop();
                 break;
 
             case SaraAnimation.push_start_sara:
                 SetAnimation(SaraAnimation.push_cycle_sara, true);
+                audioData.Stop();
                 break;
 
             case SaraAnimation.pull_start_sara:
                 SetAnimation(SaraAnimation.pull_cycle_sara, true);
+                audioData.Stop();
                 break;
 
             case SaraAnimation.push_end_sara:
@@ -179,6 +190,7 @@ public class SaraAnimator : MonoBehaviour
                     SetAnimation(SaraAnimation.run_cycle_sara, true);
                 else
                     SetAnimation(SaraAnimation.idle_sara, true);
+                audioData.Stop();
                 break;
         }
     }
