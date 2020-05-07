@@ -6,7 +6,7 @@ using TMPro;
 public class EndGameTrigger : MonoBehaviour
 {
     public TextMeshProUGUI hint;
-    private Camera camera;
+    private CameraBehaviour camera;
 
     private string endWordToDevs = @"Огромное спасибо также программистам:
         Krerg (Aleksandr Mylnikov), Bionix, BeetleMaster.";
@@ -16,7 +16,7 @@ public class EndGameTrigger : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        camera = GameObject.Find("MainCamera").GetComponent<Camera>();
+        camera = GameObject.Find("MainCamera").GetComponent<CameraBehaviour>();
     }
 
     // Update is called once per frame
@@ -42,7 +42,7 @@ public class EndGameTrigger : MonoBehaviour
         {
             camera.EndGame();
             hint.text = "";
-            hint.text = endWordToDevs;
+            StartCoroutine(Type());
         }
     }
 }
