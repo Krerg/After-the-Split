@@ -7,15 +7,15 @@ public class TriggerManager : MonoBehaviour
 
     public GameObject lockedBox;
 
-    private bool isFirstOpen = false;
+    public bool isFirstOpen = false;
 
-    private bool isSecondOpen = false;
+    public bool isSecondOpen = false;
 
-    private bool isKeyPut = false;
+    public bool isKeyPut = false;
 
     private bool canUseItem = false;
 
-    private bool isBoxUnlock = false;
+    public bool isBoxUnlock = false;
 
     private string currentActionObject = "";
 
@@ -45,6 +45,7 @@ public class TriggerManager : MonoBehaviour
                 break;
             case "UnlockBox":
                 lockedBox.GetComponent<LockedBox>().Unlock();
+                isBoxUnlock = true;
                 break;
         }
     }

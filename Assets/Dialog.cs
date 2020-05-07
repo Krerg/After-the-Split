@@ -9,15 +9,28 @@ public class Dialog : MonoBehaviour
     public string[] sentences;
     public int index;
     public float typingSpeed;
+    public bool timeB;
+    public float timeF;
 
     void Start()
     {
+        timeF = 10f;
     }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             textDisplay.text = "";
+        }
+
+        if (timeB)
+        {
+            timeF = timeF - Time.deltaTime;
+            if (timeF <= 0)
+            {
+                textDisplay.text = "";
+                timeB = false;
+            }
         }
     }
 
@@ -38,7 +51,8 @@ public class Dialog : MonoBehaviour
             index = X;
             textDisplay.text = "";
             StartCoroutine(Type());
-
+            timeB = true;
+            timeF = 10f;
         }
         else
         {
