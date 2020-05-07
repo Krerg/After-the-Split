@@ -6,6 +6,8 @@ using TMPro;
 public class Dialog : MonoBehaviour
 {
     public TextMeshProUGUI textDisplay;
+    public TextMeshProUGUI hint;
+    public TextMeshProUGUI levelHint;
     public string[] sentences;
     public int index;
     public float typingSpeed;
@@ -18,9 +20,11 @@ public class Dialog : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Delete))
         {
             textDisplay.text = "";
+            hint.text = "";
+            levelHint.text = "";
         }
 
         if (timeB)

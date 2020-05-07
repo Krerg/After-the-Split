@@ -9,6 +9,8 @@ public class DimensionSwitcher : MonoBehaviour
 
     bool isSwitchPossible = false;
 
+    public TriggerManager tm;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +37,7 @@ public class DimensionSwitcher : MonoBehaviour
                 StartCoroutine(map1.FadeImage(false));
                 StartCoroutine(map2.FadeImage(true));
                 state = 0;
+                tm.IsTom = true;
             }
             else
             {
@@ -45,6 +48,7 @@ public class DimensionSwitcher : MonoBehaviour
                 StartCoroutine(map1.FadeImage(true));
                 StartCoroutine(map2.FadeImage(false));
                 state = 1;
+                tm.IsTom = false;
             }
             SwitchPlayer();
         }

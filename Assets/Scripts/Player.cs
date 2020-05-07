@@ -150,7 +150,7 @@ public class Player : MonoBehaviour
             maxSpeed = isRunning == 1 ? maxRunningSpeed : maxWalkingSpeed;
         }
 
-        print(maxSpeed);
+        
         if (rb.velocity.x < maxSpeed)
         {
             rb.AddForce(movement * (acceleration + (isRunning * runningAcceleration)));

@@ -3,16 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(RealObject))]
-public class RealObjectEditor : Editor
+
+public class RealObjectEditor 
 {
-    public override void OnInspectorGUI()
-    {
-        RealObject obj = target as RealObject;
-        base.OnInspectorGUI();
-        if(GUILayout.Button("Create Ghost Object"))
-        {
-            obj.CreateGhost();
-        }
-    }
+    
 }
