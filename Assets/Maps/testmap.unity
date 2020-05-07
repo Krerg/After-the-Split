@@ -10799,6 +10799,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelHint: {fileID: 22361087}
   lockedBox: {fileID: 2067849540}
+  isFirstOpen: 0
+  isSecondOpen: 0
+  isKeyPut: 0
+  isBoxUnlock: 0
   IsTom: 1
 --- !u!4 &472615817
 Transform:
@@ -12511,8 +12515,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textDisplay: {fileID: 1371893123}
   itemName: SecondLock
-  useHint: 
-  typingSpeed: 0
+  useHint: "\u0412\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C
+    \u043F\u0440\u0435\u0434\u043C\u0435\u0442 \u043F\u0440\u0438 \u043F\u043E\u043C\u043E\u0449\u0438
+    E"
+  typingSpeed: 0.03
 --- !u!61 &548545927
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -15555,8 +15561,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textDisplay: {fileID: 1371893123}
   itemName: FirstLock
-  useHint: 
-  typingSpeed: 0
+  useHint: "\u0412\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C
+    \u043F\u0440\u0435\u0434\u043C\u0435\u0442 \u043F\u0440\u0438 \u043F\u043E\u043C\u043E\u0449\u0438
+    E"
+  typingSpeed: 0.03
 --- !u!61 &668872149
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -24120,8 +24128,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textDisplay: {fileID: 1371893123}
   itemName: UnlockBox
-  useHint: 
-  typingSpeed: 0
+  useHint: "\u0412\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C
+    \u043F\u0440\u0435\u0434\u043C\u0435\u0442 \u043F\u0440\u0438 \u043F\u043E\u043C\u043E\u0449\u0438
+    E"
+  typingSpeed: 0.03
 --- !u!61 &1022675312
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -45541,8 +45551,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textDisplay: {fileID: 1371893123}
   itemName: KeyLocker
-  useHint: 
-  typingSpeed: 0
+  useHint: "\u0412\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C
+    \u043F\u0440\u0435\u0434\u043C\u0435\u0442 \u043F\u0440\u0438 \u043F\u043E\u043C\u043E\u0449\u0438
+    E"
+  typingSpeed: 0.03
 --- !u!61 &1892814967
 BoxCollider2D:
   m_ObjectHideFlags: 0
