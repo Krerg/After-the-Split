@@ -10,9 +10,29 @@ public class CameraBehaviour : MonoBehaviour
 
     private bool isEndGame = false;
 
+    float tempSize;
+
+    //Фактор и скорость наезжания
+    public float ZoomSize;
+    float zoomSize;
+    public float zoomSpeed;
+
+    Camera cam;
+
     // Start is called before the first frame update
     void Start()
     {
+        cam = GetComponent<Camera>();
+
+        tempSize = cam.orthographicSize;
+
+        zoomSize = cam.orthographicSize;
+
+        transform.position = new Vector3(target.transform.position.x, target.transform.position.y, target.transform.position.z);
+
+        //Слушаем event, чтобы приблизиться к подобранному обьекту
+        GameEventSystem.current.onObjectPickedUp += ZoomToObject;
+
         transform.position = new Vector3(target.transform.position.x, target.transform.position.y, target.transform.position.z);
     }
 
@@ -52,7 +72,34 @@ public class CameraBehaviour : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x, -27f, transform.position.z);
         }
-        
+
+        if (cam.orthographicSize - zoomSize > 0.5)
+        {
+            cam.orthographicSize -= Time.deltaTime * zoomSpeed;
+        }
+        else if (zoomSize - cam.orthographicSize > 0.5)
+        {
+            cam.orthographicSize += Time.deltaTime * zoomSpeed;
+        }
+
+    }
+
+    public float zoomOutTime;
+    IEnumerator ZoomOut()
+    {
+        yield return new WaitForSeconds(zoomOutTime);
+        zoomSize = tempSize;
+        target = tempTarget;
+    }
+
+
+    Transform tempTarget;
+    private void ZoomToObject(Transform obj)
+    {
+        tempTarget = this.target;
+        this.target = obj;
+        zoomSize = ZoomSize;
+        StartCoroutine(ZoomOut());
     }
 
     public void EndGame()

@@ -48,6 +48,7 @@ public class Player : MonoBehaviour
         playerAnimators = GetComponentsInChildren<PlayerAnimator>();
         saraAnimators = GetComponentsInChildren<SaraAnimator>();
         triggerManager = GameObject.Find("TriggerManager").GetComponent<TriggerManager>();
+        Zoom(transform);
     }
 
     // Update is called once per frame
@@ -123,12 +124,6 @@ public class Player : MonoBehaviour
         float moveHorizontal = Input.GetAxis("Horizontal");
         //Движение        
         Vector2 movement = new Vector2(moveHorizontal, 0f);
-
-        
-
-        
-
-        
 
         bool inAir = !isGrounded();
 
@@ -248,7 +243,9 @@ public class Player : MonoBehaviour
         }
     }
 
-
-
-    
+    //Чтобы приблизиться к определённому обьекту, вызовите эту функцию с transform'ом этого обьекта в качестве параметра
+    public void Zoom(Transform obj)
+    {
+        GameEventSystem.current.PickUpObject(obj);
+    }
 }
