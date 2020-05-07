@@ -22,7 +22,7 @@ public class Camera : MonoBehaviour
         Vector3 target_position;
         if (isEndGame)
         {
-            target_position = new Vector3(36f, -12.44f, target.position.z);
+            target_position = new Vector3(36f, -13.44f, target.position.z);
         } else
         {
             target_position = new Vector3(target.position.x, target.position.y + 1.7f, target.position.z);
@@ -37,14 +37,14 @@ public class Camera : MonoBehaviour
             transform.position = new Vector3(-4f, transform.position.y, transform.position.z);
         }
 
-        if (approximate_target_position.x > 32f)
+        if (approximate_target_position.x > 35f)
         {
-            transform.position = new Vector3(32f, transform.position.y, transform.position.z);
+            transform.position = new Vector3(35f, transform.position.y, transform.position.z);
         }
 
-        if (approximate_target_position.y > -13f)
+        if (approximate_target_position.y > -14f)
         {
-            transform.position = new Vector3(transform.position.x, -13f, transform.position.z);
+            transform.position = new Vector3(transform.position.x, -14f, transform.position.z);
         }
 
         if (approximate_target_position.y < -27f)
