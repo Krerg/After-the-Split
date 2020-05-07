@@ -33,9 +33,9 @@ public class CameraBehaviour : MonoBehaviour
 
         Vector3 approximate_target_position = Vector3.Lerp(transform.position, target_position, speed * Time.deltaTime);
         transform.position = approximate_target_position;
-        if (approximate_target_position.x < -4f)
+        if (approximate_target_position.x < -2f)
         {
-            transform.position = new Vector3(-4f, transform.position.y, transform.position.z);
+            transform.position = new Vector3(-2f, transform.position.y, transform.position.z);
         }
 
         if (approximate_target_position.x > 35f)
@@ -43,9 +43,9 @@ public class CameraBehaviour : MonoBehaviour
             transform.position = new Vector3(35f, transform.position.y, transform.position.z);
         }
 
-        if (approximate_target_position.y > -16f)
+        if (approximate_target_position.y > -13f)
         {
-            transform.position = new Vector3(transform.position.x, -16f, transform.position.z);
+            transform.position = new Vector3(transform.position.x, -13f, transform.position.z);
         }
 
         if (approximate_target_position.y < -27f)
